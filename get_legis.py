@@ -66,14 +66,15 @@ test2 = "I will turn to the defence Dr Goh put up at the contempt proceedings be
 
 
 nlp = en_core_web_sm.load()
-tokenizer = TokenizerWithFormatting(nlp)
-doc = tokenizer(test)
+nlp.tokenizer = TokenizerWithFormatting(nlp)
+doc = nlp(test) #--> without custom tokenizer 
 matcher = Matcher(nlp.vocab, validate=True)
+
 
 #for statute codes
 pattern = [
-    [{"LOWER":"of"},{"LOWER":"the"},{"LEMMA":{"IN": codes}}],
-    [{"LOWER":"of"},{"LEMMA":{"IN": codes}}]
+    [{"POS": "NUM"},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
+    [{"POS": "NUM"},{"LOWER":"of"},{"TEXT":{"IN": codes}}]
 ]
 matcher.add("FindStatute", pattern)
 
@@ -86,9 +87,10 @@ matches = matcher(doc)
 matchlist = []
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]  # Get string representation
-    span = doc[start-1:end]  # The matched span, including section number --> this assumes section number comes before
+    span = doc[start:end]  # The matched span, including section number --> this assumes section number comes before
     matchlist.append(span)
     # print(match_id, string_id, start-2, end, span.text) --> if required
+
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []
