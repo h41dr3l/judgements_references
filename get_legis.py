@@ -1,5 +1,26 @@
 import spacy 
+import en_core_web_sm
 from spacy.matcher import Matcher
+from spacy.util import DummyTokenizer
+
+class TokenizerWithFormatting(DummyTokenizer):
+    # https://github.com/explosion/spaCy/issues/4160
+    # https://github.com/explosion/spaCy/issues/5698
+    def __init__(self, nlp):
+        self.vocab = nlp.vocab
+        self.tokenizer = nlp.tokenizer
+        
+        self.orph_paren_matcher = Matcher(self.vocab)
+        pattern = [{'TEXT': {'REGEX': r'.\([^\(\)]+$'}}, {'ORTH': ')'}] # e.g. SLR(R ) and 8(b)(i ) 
+        self.orph_paren_matcher.add('OrphanedParenthesis', [pattern])
+
+    def __call__(self, text):
+        doc = self.tokenizer(text)
+        matches = self.orph_paren_matcher(doc)
+        with doc.retokenize() as retokenizer:
+            for _, start, end in matches:
+                retokenizer.merge(doc[start:end]) # SLR(R ) => SLR(R)
+        return doc
 
 #gets the list of titles and code of a statute 
 titles = []
@@ -44,8 +65,9 @@ test2 = "I will turn to the defence Dr Goh put up at the contempt proceedings be
 #             [child for child in token.children])
 
 
-nlp = spacy.load("en_core_web_sm")
-doc = nlp(test)
+nlp = en_core_web_sm.load()
+tokenizer = TokenizerWithFormatting(nlp)
+doc = tokenizer(test)
 matcher = Matcher(nlp.vocab, validate=True)
 
 #for statute codes
@@ -56,15 +78,15 @@ pattern = [
 matcher.add("FindStatute", pattern)
 
 #for statute titles
-pattern2 = [nlp(text) for text in titles]
-matcher.add("FindTitle", pattern)
+# pattern2 = [nlp(text) for text in titles]
+# matcher.add("FindTitle", pattern)
 
 #get matches
 matches = matcher(doc)
 matchlist = []
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]  # Get string representation
-    span = doc[start-2:end]  # The matched span, including section number --> this assumes section number comes before
+    span = doc[start-1:end]  # The matched span, including section number --> this assumes section number comes before
     matchlist.append(span)
     # print(match_id, string_id, start-2, end, span.text) --> if required
 
