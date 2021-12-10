@@ -59,18 +59,13 @@ It therefore declined to set aside the registration of the Australian judgment."
 
 test2 = "I will turn to the defence Dr Goh put up at the contempt proceedings before me momentarily. Before I do so, however, it is worth nothing that, prior to the hearing, the Plaintiff commenced bankruptcy examination proceedings under s 83 of the Bankruptcy Act (Cap 20, 2009 Rev Ed) against Dr Goh. This took place on 12 and 13 April 2021 before Assistant Registrar Sim Junhui (the “Examination Proceedings”). During these proceedings, Dr Goh said that the “Chinese businessmen” referenced in his earlier 22 September 2020 email were, in fact, casino junkets. He claimed to be a very big gambler, and that he had lost the Funds in the HSBC-GZ Account on gambling in Macau. Specifically, he stated that both amounts of ¥39,428,736 and ¥46,720,151.01 – forming the subject of the HSBC Orders – were completely lost in this way.  This was first time Dr Goh raised his gambling habit (cross-reference [11] above), and it was a position he maintained during the contempt proceedings."
 
-# Get POS of text
-# for token in doc:
-#     print(token.text, token.dep_, token.head.text, token.head.pos_,
-#             [child for child in token.children])
-
-
+#change to custom tokenizer 
 nlp = en_core_web_sm.load()
 nlp.tokenizer = TokenizerWithFormatting(nlp)
-doc = nlp(test) #--> without custom tokenizer 
+doc = nlp(test)
 matcher = Matcher(nlp.vocab, validate=True)
 
-
+#TODO add to patterns 
 #for statute codes
 pattern = [
     [{"POS": "NUM"},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
@@ -105,4 +100,5 @@ for match in matchlist:
     match = ' '.join(words) 
     match_with_titles.append(f"{match} ({title})")
 
+#output
 print(match_with_titles)
