@@ -83,22 +83,23 @@ matchlist = []
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]  # Get string representation
     span = doc[start:end]  # The matched span, including section number --> this assumes section number comes before
-    matchlist.append(span)
+    matchlist.append((start, span))
     # print(match_id, string_id, start-2, end, span.text) --> if required
 
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []
 for match in matchlist:
-    words = str(match).split(' ')
+    index_of_doc = match[0]
+    words = str(match[1]).split(' ')
     title = ''
     for word in words:
         if word in codes:
             index = codes.index(word)
             title = titles[index]
             break
-    match = ' '.join(words) 
-    match_with_titles.append(f"{match} ({title})")
+    matched_word = ' '.join(words) 
+    match_with_titles.append(f"{str(index_of_doc)}: {matched_word} ({title})")
 
 #output
 print(match_with_titles)
