@@ -23,6 +23,16 @@ class TokenizerWithFormatting(DummyTokenizer):
                 retokenizer.merge(doc[start:end]) # SLR(R ) => SLR(R)
         return doc
 
+def num_pos_tagger(doc):
+    for token in doc:
+        for ch in token.text:
+            if ch.isdigit():
+                token.pos_ = 'NUM'
+                break
+    return doc
+
+
+
 #gets the list of titles and code of a statute 
 titles = []
 codes = []
@@ -43,34 +53,32 @@ with open('legis_name.txt', 'r') as f:
         codes.append(statute_code)
 
 
-# with open('2000_SGCA_41.txt', 'r') as f:
-#     test = f.read()
+with open('2000_SGCA_41.txt', 'r') as f:
+    test = f.read()
 #test text
-test ="""Burswood Nominees similarly involved the registration of an Australian judgment for 
-gambling debts under the RECJA. In fact, like the present case, the underlying debt giving rise to 
-the Australian judgment in Burswood Nominees was also a debt incurred pursuant to an Australian casino’s 
-CCF (at [3]). The court held that, although the debt arising from the CCF took the form of a loan, it was 
-in substance a claim for money won upon a wager, which would have been caught by s 5(2) of the CLA if the 
-claim had been brought in a Singapore court in the first instance (at [21]–[22]). However, the court went 
-on to hold that, while s 5(2) of the CLA elucidates Singapore’s domestic public policy, s 3(2)(f) of the 
-RECJA requires a higher threshold of public policy to be met in order for the registration of a foreign judgment 
-to be refused (at [24]). The meeting of this higher threshold of public policy, described by the court as 
-“international” public policy, involves asking whether the domestic public policy in question was so important as to 
-form part of the core of essential principles of justice and morality shared by all nations (at [42]). The court held 
-that the domestic public policy encapsulated in s 5(2) of CLA did not meet this higher threshold (at [42]–[46]). 
-It therefore declined to set aside the registration of the Australian judgment."""
+# test ="""Burswood Nominees similarly involved the registration of an Australian judgment for 
+# gambling debts under the RECJA. In fact, like the present case, the underlying debt giving rise to 
+# the Australian judgment in Burswood Nominees was also a debt incurred pursuant to an Australian casino’s 
+# CCF (at [3]). The court held that, although the debt arising from the CCF took the form of a loan, it was 
+# in substance a claim for money won upon a wager, which would have been caught by s 5(2) of the CLA if the 
+# claim had been brought in a Singapore court in the first instance (at [21]–[22]). However, the court went 
+# on to hold that, while s 5(2) of the CLA elucidates Singapore’s domestic public policy, s 3(2)(f) of the 
+# RECJA requires a higher threshold of public policy to be met in order for the registration of a foreign judgment 
+# to be refused (at [24]). The meeting of this higher threshold of public policy, described by the court as 
+# “international” public policy, involves asking whether the domestic public policy in question was so important as to 
+# form part of the core of essential principles of justice and morality shared by all nations (at [42]). The court held 
+# that the domestic public policy encapsulated in s 5(2) of CLA did not meet this higher threshold (at [42]–[46]). 
+# It therefore declined to set aside the registration of the Australian judgment."""
 
 # test = "it has been 121(1) of the CPC states that"
 
 #change to custom tokenizer 
 nlp = en_core_web_sm.load()
 nlp.tokenizer = TokenizerWithFormatting(nlp)
+nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
 doc = nlp(test)
 matcher = Matcher(nlp.vocab, validate=True)
 
-
-# for i in doc:
-#     print(i,i.pos_)
 
 #TODO add to patterns 
 pattern = [
