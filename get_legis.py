@@ -53,7 +53,7 @@ with open('legis_name.txt', 'r') as f:
         codes.append(statute_code)
 
 
-with open('2000_SGCA_41.txt', 'r') as f:
+with open('2000_SGCA_64.txt', 'r') as f:
     test = f.read()
 #test text
 # test ="""Burswood Nominees similarly involved the registration of an Australian judgment for 
@@ -100,18 +100,20 @@ for match_id, start, end in matches:
 titles_matcher = PhraseMatcher(nlp.vocab)
 patterns = [nlp.make_doc(text) for text in titles]
 titles_matcher.add("TitlesList", patterns)
-
 title_matches = titles_matcher(doc)
-for match_id, start, end in title_matches:
-    string_id = nlp.vocab.strings[match_id]  
-    start = 0
-    for i in range(end, 0, -1):
-        if doc[i].pos_ == 'NUM':
-            start = i
-            break
-    if start != 0: #only when there is a number before the statute title
-        span = doc[start:end]  
-        matchlist.append((start, span))
+if len(title_matches) != 0:
+    for match_id, start, end in title_matches:
+        string_id = nlp.vocab.strings[match_id]  
+        start = 0
+        for i in range(end, 0, -1):
+            if doc[i].pos_ == 'NUM':
+                start = i
+                if start == end: #handles error that start index = end index
+                    start = 0
+                break
+        if start != 0: #only when there is a number before the statute title
+            span = doc[start:end]  
+            matchlist.append((start, span))
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []
@@ -133,4 +135,7 @@ for match in matchlist:
 
 
 #output
-print(match_with_titles)
+if len(match_with_titles) == 0:
+    print('No matches could be found')
+else: 
+    print(match_with_titles)
