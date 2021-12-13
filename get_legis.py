@@ -83,7 +83,8 @@ matcher = Matcher(nlp.vocab, validate=True)
 #TODO add to patterns 
 pattern = [
     [{"POS": "NUM"},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
-    [{"POS": "NUM"},{"LOWER":"of"},{"TEXT":{"IN": codes}}]
+    [{"POS": "NUM"},{"LOWER":"of"},{"TEXT":{"IN": codes}}],
+    [{"POS": "NUM"},{"TEXT":{"IN": codes}}]
 ]
 matcher.add("FindStatute", pattern)
 
