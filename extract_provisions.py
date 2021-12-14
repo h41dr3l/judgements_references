@@ -33,7 +33,7 @@ def num_pos_tagger(doc):
 
 def get_text(filename):
     with open(filename, 'r') as f:
-        test = f.read().replace('\n', ' ')
+        test = f.read().replace('\n', ' ').split('.')[:-1]
     return test
 
 #gets the list of titles and code of a statute 
@@ -62,7 +62,6 @@ def extract_ref_sentences(filename):
     nlp = en_core_web_sm.load()
     nlp.tokenizer = TokenizerWithFormatting(nlp)
     nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
-    doc = nlp(test)
     matchlist = []
 
     matcher = Matcher(nlp.vocab, validate=True)
@@ -74,58 +73,35 @@ def extract_ref_sentences(filename):
     ]
     matcher.add("FindStatute", pattern)
 
-
-    #get matches for codes
-    matches = matcher(doc)
-    for match_id, start, end in matches:
-        string_id = nlp.vocab.strings[match_id]
-        start_sentence_index = 0
-        end_sentence_index = 0
-        for i in range(end-1, 0, -1): #in case end index == '.'
-            if str(doc[i]) == ".":
-                start_sentence_index = i+1 #finds the start of the sentence containing the reference
-                break
-        for i in range(start_sentence_index, len(doc)):
-            if str(doc[i]) == ".":
-                end_sentence_index = i #finds the end of the sentence containing the reference
-                break
-        sentence_span = doc[start_sentence_index:end_sentence_index] #gives the whole sentence
-        match_span = doc[start:end] #gives specific reference to the statute
-        item = (start, match_span, sentence_span) #gives start index of match as well
-        if item not in matchlist: #handles duplicates
-            matchlist.append(item)
-
-    #get matches for titles
     titles_matcher = PhraseMatcher(nlp.vocab)
     patterns = [nlp.make_doc(text) for text in titles]
     titles_matcher.add("TermsList", patterns)
-    title_matches = titles_matcher(doc)
-    if len(title_matches) != 0:
+
+    for sentence in test:
+        doc = nlp(sentence)
+        matches = matcher(doc)
         for match_id, start, end in matches:
             string_id = nlp.vocab.strings[match_id]
-            start_sentence_index = 0
-            end_sentence_index = 0
-            for i in range(end-1, 0, -1):
-                if doc[i].pos_ == "NUM": #finds reference to provision number in the sentence
-                    start = i
-                    break
-            for i in range(end, 0, -1): #finds beginning of sentence containing the reference
-                if str(doc[i]) == ".":
-                    start_sentence_index = i+1
-                    break
-            for i in range(start_sentence_index, len(doc)): #finds end of sentence containing the reference
-                if str(doc[i]) == ".":
-                    end_sentence_index = i
-                    break
-            if start == end: #handles error if start == end
-                start = start_sentence_index
-            sentence_span = doc[start_sentence_index:end_sentence_index] #gives the whole sentence
-            match_span = doc[start:end] #gives specific reference to the statute 
-            item = (start, match_span, sentence_span) #gives start index of match as well
+            match_span = doc[start:end] #gives specific reference to the statute
+            item = (match_span, sentence) #gives start index of match as well
             if item not in matchlist: #handles duplicates
                 matchlist.append(item)
-    matchlist.sort(key=lambda tup: tup[0]) #sorts based on start index number
+        title_matches = titles_matcher(doc)
+        if len(title_matches) != 0:
+            for match_id, start, end in matches:
+                original_start = start
+                for i in range(end-1, 0, -1):
+                    if doc[i].pos_ == "NUM": #finds reference to provision number in the sentence
+                        start = i
+                        break
+                if start == end:
+                    start = 0
+                match_span = doc[start:end] #gives specific reference to the statute 
+                item = (match_span, sentence) #gives start index of match as well
+                if item not in matchlist: #handles duplicates
+                    matchlist.append(item)
     return matchlist
+
 
 print(extract_ref_sentences("2000_SGCA_55.txt"))
 
