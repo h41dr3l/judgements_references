@@ -33,7 +33,7 @@ def num_pos_tagger(doc):
 
 def get_text(filename):
     with open(filename, 'r') as f:
-        test = f.read().replace('\n', ' ').split('.')[:-1]
+        test = f.read().replace('\n', ' ')#.split('.')[:-1]
     return test
 
 #gets the list of titles and code of a statute 
@@ -77,7 +77,8 @@ def extract_ref_sentences(filename):
     patterns = [nlp.make_doc(text) for text in titles]
     titles_matcher.add("TermsList", patterns)
 
-    for sentence in test:
+    for sentence in nlp(test).sents:
+        sentence = str(sentence)
         doc = nlp(sentence)
         matches = matcher(doc)
         for match_id, start, end in matches:
