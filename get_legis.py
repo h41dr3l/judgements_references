@@ -23,13 +23,13 @@ class TokenizerWithFormatting(DummyTokenizer):
                 retokenizer.merge(doc[start:end]) # SLR(R ) => SLR(R)
         return doc
 
-# def num_pos_tagger(doc):
-#     for token in doc:
-#         for ch in token.text:
-#             if ch.isdigit():
-#                 token.pos_ = 'NUM'
-#                 break
-#     return doc
+def num_pos_tagger(doc):
+    for token in doc:
+        for ch in token.text:
+            if ch.isdigit():
+                token.pos_ = 'NUM'
+                break
+    return doc
 
 
 
@@ -75,16 +75,16 @@ with open('2000_SGCA_64.txt', 'r') as f:
 #change to custom tokenizer 
 nlp = en_core_web_sm.load()
 nlp.tokenizer = TokenizerWithFormatting(nlp)
-# nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
+nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
 doc = nlp(test)
 matcher = Matcher(nlp.vocab, validate=True)
 
 
 #TODO add to patterns 
 pattern = [
-    [{"IS_DIGIT": True},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
-    [{"IS_DIGIT": True},{"LOWER":"of"},{"TEXT":{"IN": codes}}],
-    [{"IS_DIGIT": True},{"TEXT":{"IN": codes}}]
+    [{"POS": "NUM"},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
+    [{"POS": "NUM"},{"LOWER":"of"},{"TEXT":{"IN": codes}}],
+    [{"POS": "NUM"},{"TEXT":{"IN": codes}}]
 ]
 matcher.add("FindStatute", pattern)
 
@@ -95,7 +95,9 @@ matchlist = []
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]  # Get string representation
     span = doc[start:end]
-    matchlist.append((start, span))  
+    item = (start, span)
+    if item not in matchlist: 
+        matchlist.append(item)  
 
 #get matches for titles
 titles_matcher = PhraseMatcher(nlp.vocab)
@@ -114,7 +116,9 @@ if len(title_matches) != 0:
                 break
         if start != 0: #only when there is a number before the statute title
             span = doc[start:end]  
-            matchlist.append((start, span))
+            item = (start, span)
+            if item not in matchlist: 
+                matchlist.append(item)
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []

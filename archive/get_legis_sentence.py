@@ -53,7 +53,7 @@ with open('legis_name.txt', 'r') as f:
         codes.append(statute_code)
 
 
-with open('2000_SGCA_64.txt', 'r') as f:
+with open('2000_SGCA_55.txt', 'r') as f:
     test = f.read().replace('\n', ' ')
 #test text
 # test ="""Burswood Nominees similarly involved the registration of an Australian judgment for 
@@ -84,7 +84,8 @@ matcher = Matcher(nlp.vocab, validate=True)
 pattern = [
     [{"POS": "NUM"},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
     [{"POS": "NUM"},{"LOWER":"of"},{"TEXT":{"IN": codes}}],
-    [{"POS": "NUM"},{"TEXT":{"IN": codes}}]
+    [{"POS": "NUM"},{"TEXT":{"IN": codes}}],
+    [{"POS": "PROPN"}, {"LOWER":"schedule"}]
 ]
 matcher.add("FindStatute", pattern)
 
@@ -95,7 +96,7 @@ matchlist = []
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]
     start = 0
-    for i in range(end, 0, -1):
+    for i in range(end-1, 0, -1):
         if str(doc[i]) == ".":
             start = i+1
             break
@@ -103,8 +104,10 @@ for match_id, start, end in matches:
         if str(doc[i]) == ".":
             end = i
             break
-    span = doc[start:end]  
-    matchlist.append((start, span))
+    span = doc[start:end] 
+    item = (start, span)
+    if item not in matchlist: 
+        matchlist.append(item)
 
 
 #get matches for titles
@@ -116,7 +119,7 @@ if len(title_matches) != 0:
     for match_id, start, end in title_matches:
         string_id = nlp.vocab.strings[match_id]  
         start = 0
-        for i in range(end, 0, -1):
+        for i in range(end-1, 0, -1):
             if str(doc[i]) == ".":
                 start = i+1
                 break
@@ -125,7 +128,9 @@ if len(title_matches) != 0:
                 end = i
                 break
         span = doc[start:end]  
-        matchlist.append((start, span))
+        item = (start, span)
+        if item not in matchlist: 
+            matchlist.append(item)
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []
@@ -151,3 +156,4 @@ if len(match_with_titles) == 0:
     print('No matches could be found')
 else: 
     print(match_with_titles)
+
