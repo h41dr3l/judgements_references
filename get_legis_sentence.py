@@ -23,13 +23,13 @@ class TokenizerWithFormatting(DummyTokenizer):
                 retokenizer.merge(doc[start:end]) # SLR(R ) => SLR(R)
         return doc
 
-# def num_pos_tagger(doc):
-#     for token in doc:
-#         for ch in token.text:
-#             if ch.isdigit():
-#                 token.pos_ = 'NUM'
-#                 break
-#     return doc
+def num_pos_tagger(doc):
+    for token in doc:
+        for ch in token.text:
+            if ch.isdigit():
+                token.pos_ = 'NUM'
+                break
+    return doc
 
 
 
@@ -54,7 +54,7 @@ with open('legis_name.txt', 'r') as f:
 
 
 with open('2000_SGCA_64.txt', 'r') as f:
-    test = f.read()
+    test = f.read().replace('\n', ' ')
 #test text
 # test ="""Burswood Nominees similarly involved the registration of an Australian judgment for 
 # gambling debts under the RECJA. In fact, like the present case, the underlying debt giving rise to 
@@ -75,16 +75,16 @@ with open('2000_SGCA_64.txt', 'r') as f:
 #change to custom tokenizer 
 nlp = en_core_web_sm.load()
 nlp.tokenizer = TokenizerWithFormatting(nlp)
-# nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
+nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
 doc = nlp(test)
 matcher = Matcher(nlp.vocab, validate=True)
 
 
 #TODO add to patterns 
 pattern = [
-    [{"IS_DIGIT": True},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
-    [{"IS_DIGIT": True},{"LOWER":"of"},{"TEXT":{"IN": codes}}],
-    [{"IS_DIGIT": True},{"TEXT":{"IN": codes}}]
+    [{"POS": "NUM"},{"LOWER":"of"},{"LOWER":"the"},{"TEXT":{"IN": codes}}],
+    [{"POS": "NUM"},{"LOWER":"of"},{"TEXT":{"IN": codes}}],
+    [{"POS": "NUM"},{"TEXT":{"IN": codes}}]
 ]
 matcher.add("FindStatute", pattern)
 
@@ -93,9 +93,19 @@ matcher.add("FindStatute", pattern)
 matches = matcher(doc)
 matchlist = []
 for match_id, start, end in matches:
-    string_id = nlp.vocab.strings[match_id]  # Get string representation
-    span = doc[start:end]
-    matchlist.append((start, span))  
+    string_id = nlp.vocab.strings[match_id]
+    start = 0
+    for i in range(end, 0, -1):
+        if str(doc[i]) == ".":
+            start = i+1
+            break
+    for i in range(start, len(doc)):
+        if str(doc[i]) == ".":
+            end = i
+            break
+    span = doc[start:end]  
+    matchlist.append((start, span))
+
 
 #get matches for titles
 titles_matcher = PhraseMatcher(nlp.vocab)
@@ -107,14 +117,15 @@ if len(title_matches) != 0:
         string_id = nlp.vocab.strings[match_id]  
         start = 0
         for i in range(end, 0, -1):
-            if doc[i].pos_ == 'NUM':
-                start = i
-                if start == end: #handles error that start index = end index
-                    start = 0
+            if str(doc[i]) == ".":
+                start = i+1
                 break
-        if start != 0: #only when there is a number before the statute title
-            span = doc[start:end]  
-            matchlist.append((start, span))
+        for i in range(start, len(doc)):
+            if str(doc[i]) == ".":
+                end = i
+                break
+        span = doc[start:end]  
+        matchlist.append((start, span))
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []
@@ -129,7 +140,7 @@ for match in matchlist:
             break
     if len(title) != 0: #match has a statute code
         matched_word = ' '.join(words) 
-        match_with_titles.append(f"{str(index_of_doc)}: {matched_word} ({title})")
+        match_with_titles.append(f"{str(index_of_doc)}: {matched_word}")
     else: #match has a title
         matched_word = ' '.join(words) 
         match_with_titles.append(f"{str(index_of_doc)}: {matched_word}")
