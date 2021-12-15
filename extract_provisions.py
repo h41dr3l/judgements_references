@@ -81,12 +81,12 @@ def extract_ref_sentences(filename):
         sentence = str(sentence)
         doc = nlp(sentence)
         matches = matcher(doc)
+        matches_in_sentence = []
         for match_id, start, end in matches:
             string_id = nlp.vocab.strings[match_id]
             match_span = doc[start:end] #gives specific reference to the statute
             item = (match_span, sentence) #gives start index of match as well
-            if item not in matchlist: #handles duplicates
-                matchlist.append(item)
+            matches_in_sentence.append(item)
         title_matches = titles_matcher(doc)
         if len(title_matches) != 0:
             for match_id, start, end in title_matches:
@@ -99,8 +99,9 @@ def extract_ref_sentences(filename):
                     start = 0
                 match_span = doc[start:end] #gives specific reference to the statute 
                 item = (match_span, sentence) #gives start index of match as well
-                if item not in matchlist: #handles duplicates
-                    matchlist.append(item)
+                matches_in_sentence.append(item)
+        if len(matches_in_sentence) != 0:
+            matchlist.append(matches_in_sentence[0]) #adds 1st match in sentence to main output
     return matchlist
 
 
