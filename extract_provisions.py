@@ -89,7 +89,7 @@ def extract_ref_sentences(filename):
                 matchlist.append(item)
         title_matches = titles_matcher(doc)
         if len(title_matches) != 0:
-            for match_id, start, end in matches:
+            for match_id, start, end in title_matches:
                 original_start = start
                 for i in range(end-1, 0, -1):
                     if doc[i].pos_ == "NUM": #finds reference to provision number in the sentence
@@ -104,5 +104,5 @@ def extract_ref_sentences(filename):
     return matchlist
 
 
-# print(extract_ref_sentences("2000_SGCA_55.txt"))
+print(extract_ref_sentences("./html/2000_SGCA_32.txt"))
 

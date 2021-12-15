@@ -1,3 +1,39 @@
+2000_SGCA_1.txt: No matches 
+
+2000_SGCA_2.txt: No matches 
+
+2000_SGCA_3.txt: No matches 
+
+2000_SGCA_4.txt: No matches 
+
+2000_SGCA_5.txt: No matches 
+
+2000_SGCA_6.txt: No matches 
+
+2000_SGCA_7.txt: No matches 
+
+2000_SGCA_8.txt: No matches 
+
+2000_SGCA_10.txt: No matches 
+
+2000_SGCA_11.txt: No matches 
+
+2000_SGCA_12.txt: No matches 
+
+2000_SGCA_13.txt: No matches 
+
+2000_SGCA_14.txt: No matches 
+
+2000_SGCA_15.txt: No matches 
+
+2000_SGCA_16.txt: No matches 
+
+2000_SGCA_17.txt: No matches 
+
+2000_SGCA_18.txt: No matches 
+
+2000_SGCA_19.txt: No matches 
+
 2000_SGCA_20.txt: No matches 
 
 2000_SGCA_21.txt: No matches 
@@ -63,40 +99,4 @@
 2000_SGCA_48.txt: No matches 
 
 2000_SGCA_49.txt: No matches 
-
-2000_SGCA_50.txt: No matches 
-
-2000_SGCA_51.txt: No matches 
-
-2000_SGCA_52.txt: No matches 
-
-2000_SGCA_53.txt: No matches 
-
-2000_SGCA_54.txt: No matches 
-
-2000_SGCA_55.txt:
-1: (First Schedule, 'Blk 31 Dover Road #03-111, Singapore, did traffic in a controlled drug specified in Class "A" of the First Schedule to the Misuse of Drugs Act, Chapter 185, to wit, by having in your possession for the purpose of trafficking 8 slabs of substance containing 12,722 grams of opium containing not less than 248.64 grams of morphine at the aforesaid place without any authorisation under the said Act or the regulations made thereunder, and you have thereby committed an offence under Section 5(1)(a) read with Section 5(2) and punishable under Section 33 of the Misuse of Drugs Act, Chapter 185.')
- ----------
-2: (111, Singapore, did traffic in a controlled drug specified in Class "A" of the First Schedule, 'Blk 31 Dover Road #03-111, Singapore, did traffic in a controlled drug specified in Class "A" of the First Schedule to the Misuse of Drugs Act, Chapter 185, to wit, by having in your possession for the purpose of trafficking 8 slabs of substance containing 12,722 grams of opium containing not less than 248.64 grams of morphine at the aforesaid place without any authorisation under the said Act or the regulations made thereunder, and you have thereby committed an offence under Section 5(1)(a) read with Section 5(2) and punishable under Section 33 of the Misuse of Drugs Act, Chapter 185.')
- ----------
-3: (5(2) of the MDA, 'The latter type, which is that with which we are concerned in this appeal, is created by s 5(2) of the MDA.')
- ----------
-4: (17 of the MDA, 'Once the above is satisfied, s 17 of the MDA then comes into operation, creating a presumption that the accused was in possession of the offensive substances for the purpose of trafficking in them.')
- ----------
-5: (17 of the MDA, 'The question of possession The first issue which needed to be determined in this appeal therefore was the question of whether or not the prosecution had even succeeded in proving that the appellant was in possession of the opium at the time of her arrest, for, as mentioned earlier, possession of the drugs must be proved beyond a reasonable doubt before the presumption in s 17 of the MDA may be relied upon.')
- ----------
-6: (5(1)(a) of the MDA, 'It is further pertinent at this stage to point out that even if the appellant was unaware that opium would be delivered to her and that she intended upon their discovery to return the drugs back to Henry Tan when the opportunity arose, this alone is sufficient to constitute the offence of trafficking under s 5(1)(a) of the MDA.')
- ----------
-7: (5(2) of the MDA, '2 SLR 349 that under s 5(2) of the MDA, a person commits the offence of trafficking if he had in his possession that drug for the purpose of trafficking.')
- ----------
-8: (17 of the MDA, 'In light of the above reasons, we found that the learned trial judge was correct in concluding that the appellant was guilty of the offence as charged and that she had failed to rebut the presumption under s 17 of the MDA.')
- ----------
-
-2000_SGCA_56.txt: No matches 
-
-2000_SGCA_57.txt: No matches 
-
-2000_SGCA_58.txt: No matches 
-
-2000_SGCA_59.txt: No matches 
 
