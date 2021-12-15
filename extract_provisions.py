@@ -1,8 +1,10 @@
+import typing_extensions
 import spacy 
 import en_core_web_sm
 from spacy.matcher import Matcher
 from spacy.util import DummyTokenizer
 from spacy.matcher import PhraseMatcher
+import pysbd
 
 class TokenizerWithFormatting(DummyTokenizer):
     # https://github.com/explosion/spaCy/issues/4160
@@ -77,7 +79,8 @@ def extract_ref_sentences(filename):
     patterns = [nlp.make_doc(text) for text in titles+codes]
     titles_matcher.add("TermsList", patterns)
 
-    for sentence in nlp(test).sents:
+    seg = pysbd.Segmenter(language = "en", clean="False")
+    for sentence in seg.segment(test):
         sentence = str(sentence)
         doc = nlp(sentence)
         matches = matcher(doc)
