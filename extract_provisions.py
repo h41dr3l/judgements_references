@@ -104,5 +104,5 @@ def extract_ref_sentences(filename):
     return matchlist
 
 
-print(extract_ref_sentences("2000_SGCA_55.txt"))
+# print(extract_ref_sentences("2000_SGCA_55.txt"))
 
