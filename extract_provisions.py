@@ -32,7 +32,7 @@ def num_pos_tagger(doc):
     return doc
 
 def get_text(filename):
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding="utf8") as f:
         test = f.read().replace('\n', ' ')#.split('.')[:-1]
     return test
 
@@ -74,7 +74,7 @@ def extract_ref_sentences(filename):
     matcher.add("FindStatute", pattern)
 
     titles_matcher = PhraseMatcher(nlp.vocab)
-    patterns = [nlp.make_doc(text) for text in titles]
+    patterns = [nlp.make_doc(text) for text in titles+codes]
     titles_matcher.add("TermsList", patterns)
 
     for sentence in nlp(test).sents:
@@ -104,5 +104,5 @@ def extract_ref_sentences(filename):
     return matchlist
 
 
-print(extract_ref_sentences("./html/2000_SGCA_32.txt"))
+# print(extract_ref_sentences("./html/2000_SGCA_32.txt"))
 

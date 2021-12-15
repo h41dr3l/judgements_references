@@ -2,8 +2,8 @@ from extract_provisions import extract_ref_sentences
 from pathlib import Path
 
 with open('output.txt', 'w') as f:
-    for i in range(1,50): #to change accordingly for testing
-        filename = "2000_SGCA_" + str(i) + ".txt" #to change accordingly for testing
+    for i in range(1,204): #to change accordingly for testing
+        filename = "2021_SGHC_" + str(i) + ".txt" #to change accordingly for testing
         my_file = Path(f"./html/{filename}")
         match_num = 1
         if my_file.is_file():
