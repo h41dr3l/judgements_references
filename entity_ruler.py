@@ -38,12 +38,12 @@ def extract_ref_sentences(filename):
     for title in titles: #create patterns for each title
         title = title.split()
         prov_pattern = [{"LOWER": "s", "OP":"?"},
-                        {"POS": "NUM", "OP":"?"}, 
+                        {"POS": "NUM", "OP":"+"}, 
                         {"ORTH": ")", "OP": "?"},
                         {"LOWER":"of"}, 
                         {"LOWER": "the", "OP": "?"}]
         schedule_pattern = [{"POS": "PROPN", "OP": "?"},
-                {"LOWER":"schedule", "OP":"?"}, 
+                {"LOWER":"schedule"}, 
                 {"LOWER":"of"}, 
                 {"LOWER": "the", "OP": "?"}]                
         for word in title: #add all the words in the title to the pattern
@@ -53,6 +53,23 @@ def extract_ref_sentences(filename):
         pattern.append({"label": "PROVISION", "pattern": schedule_pattern})
     ruler.add_patterns(pattern)
  
+    pattern_codes = []
+    for code in codes: #create patterns for each code
+        prov_pattern = [{"LOWER": "s", "OP":"?"},
+                        {"POS": "NUM", "OP":"+"}, 
+                        {"ORTH": ")", "OP": "?"},
+                        {"LOWER":"of"}, 
+                        {"LOWER": "the", "OP": "?"},
+                        {"TEXT": code}]
+        schedule_pattern = [{"POS": "PROPN", "OP": "?"},
+                {"LOWER":"schedule"}, 
+                {"LOWER":"of"}, 
+                {"LOWER": "the", "OP": "?"},
+                {"TEXT": code}]                
+        pattern_codes.append({"label": "PROVISION", "pattern": prov_pattern})
+        pattern_codes.append({"label": "PROVISION", "pattern": schedule_pattern})
+    ruler.add_patterns(pattern_codes)
+
     doc = nlp(test)
     for ent in doc.ents:
         if ent.label_ == "PROVISION":
@@ -60,6 +77,6 @@ def extract_ref_sentences(filename):
     spacy.displacy.serve(doc, style="ent")
 
 
-extract_ref_sentences("./html/2021_SGHC_10.txt")
+extract_ref_sentences("./html/2021_SGHC_16.txt")
 
 
