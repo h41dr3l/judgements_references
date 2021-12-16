@@ -36,4 +36,4 @@ def write_output_to_file(year =2021, type="SGCA", start_number= 1, end_number=10
                         match_num += 1
                     f.write("\n")
 
-write_output_to_file(2021, "SGCA", 1, 10, "output_2021")
+write_output_to_file(2021, "SGHC", 1, 205, "output_2021_sghc")

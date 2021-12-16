@@ -1,0 +1,202 @@
+2021_SGCAI_1.txt:
+1: (2020 (“CA, 'The company owning Villa 29 is the fifth respondent in Civil Appeal No 38 of 2020 (“CA 38”), Querencia Limited (“Querencia”), incorporated in the British Virgin Islands (“BVI”).')
+ ----------
+2: (CA, 'Querencia was the vehicle which the first and second respondents in CA 38, Mr Kaikhushru Shiavax Nargolwala and Mrs Aparna Nargolwala (“Mr Nargolwala” and “Mrs Nargolwala” respectively; “the Nargolwalas” collectively), residents of Singapore, used to acquire Villa 29 while it was being built in 2007.')
+ ----------
+3: (CA, 'The appellant in CA 38, Mr Solomon Lew (“Mr Lew”), resident in Melbourne, Australia, says that the Nargolwalas, in response to an offer he had made, communicated to him through Mr Meury their binding oral agreement to sell their shares in Querencia to him on or about 11 October 2017.')
+ ----------
+4: (2017 transferred, their shares in Querencia to the third respondent in CA, 'The Nargolwalas deny this and say that they sold, and on 14 November 2017 transferred, their shares in Querencia to the third respondent in CA 38, Quo Vadis Investments Limited (“Quo Vadis”), a Hong Kong company controlled by the fourth respondent in CA 38, Mr Christian Larpin (“Mr Larpin”), and of which Mrs Dao Te Lagger (“Mrs Te Lagger”) was a director.')
+ ----------
+5: (CA, 'The first appeal, CA 38, is by Mr Lew against the dismissal of all his claims against all the respondents.')
+ ----------
+6: (2020 (“CA, 'The second appeal, Civil Appeal No 126 of 2020 (“CA 126”), is by Mr and Mrs Nargolwala against that latter aspect of the judge’s costs order.')
+ ----------
+7: (SPA, '(“SPA”)')
+ ----------
+8: (SPA, 'The SPA was signed by Mr Nargolwala in Singapore and was taken by Mrs Nargolwala to Phuket where it was signed by Mrs Nargolwala and by Mrs Te Lagger on behalf of Quo Vadis late in the afternoon of 14 November 2017.')
+ ----------
+9: (SPA, 'Mr Lew suggested at trial that by the time of the SPA Mr Larpin knew or was on notice of a prior agreement with Mr Lew.')
+ ----------
+10: (SPA, 'The SPA provided for completion to take place, as it did, two days later, ie, on 16 November 2017.')
+ ----------
+11: (CA, 'Before addressing the substantive merits of the issues in CA 38, we make a preliminary point about the governing law.')
+ ----------
+12: (CA, 'CA 38 raises two primary issues: a contractual issue as to whether the alleged oral contract was formed on 11 October 2017, and an agency issue as to whether Mr Meury was authorised to convey the Nargolwalas’ acceptance of Mr Lew’s offer on the same date.')
+ ----------
+13: (SEA, '(SEA)')
+ ----------
+14: (2020] SGCA, 'The scope of an agent’s implied authority depends on the circumstances of each case, including the parties’ words and conduct towards each other: Alphire Group Pte Ltd v Law Chau Loon and another matter [2020] SGCA 50 at [7].')
+ ----------
+15: (CA, 'The appeal in CA 38 fails accordingly as against Mr and Mrs Nargolwala.')
+ ----------
+16: (CA, 'As the judge held, it therefore also fails as against all the other respondents in CA 38, whose liability depended on knowledge of an actual binding contract between the Nargolwalas and Mr Lew.')
+ ----------
+17: (CA, 'We should not part with the appeal in CA 38 without addressing a word to the judge’s approach to the liability of Querencia.')
+ ----------
+18: (CA, 'It has not been necessary, in order to dispose of the appeal in CA 38, to determine Mr and Mrs Nargolwala’s cross-appeal to the effect that')
+ ----------
+19: (CA, 'That is for the purposes of the Nargolwalas’ appeal in CA 126 against the judge’s order that they should bear and pay all the costs of that issue.')
+ ----------
+20: (SA, 'The judge then referred on the issue before him to the judgment of Mavis Chionh Sze Chyi JC in Pegaso Servicios Administrativos SA de CV and another v DP Offshore Engineering Pte Ltd and another [2019] SGHC 47 (“Pegaso”), against which an appeal was lodged but dismissed by this Court (without issuing written grounds) on 30 October 2019.')
+ ----------
+21: (SA, '… Compania Naviera Micro SA v Shipley International Inc (The Parouth) [1982] 2 Lloyd’s Rep 351 (“The Parouth”) is a decision of the Court of Appeal of England and Wales, one of three English decisions cited in Dicey, Morris and Collins at para 32-110 et seq as authority in favour of the use of the “putative proper law” to determine whether a concluded contract has come into existence.')
+ ----------
+22: (583; Compagnie Tunisienne de Navigation SA, "Common law courts, including in Singapore, are very familiar with the exercise of identifying the law with the objectively closest connection to a concluded contract, in the absence of any express or inferred choice by the parties: see, eg, in addition to JIO Minerals, Wasa International Insurance Co Ltd v Lexington Insurance Co; AGF Insurance Ltd v Same [2010] 1 AC 180 at [90] (citing Whitworth Street Estates (Manchester) Ltd v James Miller and Partners Ltd [1970] AC 583; Compagnie Tunisienne de Navigation SA v Compagnie d'Armement Maritime SA [1971] AC 572; Amin Rasheed Shipping Corp v Kuwait Insurance Co [1984] AC 50).")
+ ----------
+23: (CA, 'That resolves Mr and Mrs Nargolwala’s cross-appeal on costs in CA 126.')
+ ----------
+24: (CA, 'The Nargolwalas should have been awarded their costs including those of the Thai law issue, and their appeal in CA 126 succeeds.')
+ ----------
+25: (CA, 'Mr Lew’s appeal in CA 38 therefore fails (see [57] above).')
+ ----------
+
+2021_SGCAI_2.txt:
+1: (CA, 'CA/CA 100/2020 (“CA 100”) is an appeal against the decision of the International Judge (“the Judge”) in Beyonics Asia Pacific Ltd and others v Goh Chan Peng and another [2020] 4 SLR 215 (“the Judgment”), in which the Judge struck out the appellants’ claims in SIC/S 10/2018 (“S 10”) for being in abuse of process.')
+ ----------
+2: (CA, 'CA/CA 185/2020 (“CA 185”) is an appeal against the Judge’s decision on costs.')
+ ----------
+3: (672 Judgment in CA, 'The appeal against the 672 Judgment in CA/CA 94/2016 was partially allowed.')
+ ----------
+4: (2021] SGCA, 'This court further noted in Ong Han Nam v Borneo Ventures Pte Ltd [2021] SGCA 21 at [71] that “[r]epeated claims by the same plaintiffs or repeated claims against the same defendant are not necessarily the critical factor”; rather, “[f]airness or oppressiveness, as demonstrated by the facts of the case, is the decisive factor”.')
+ ----------
+5: (CA, 'It is undoubtedly correct that this court was entitled to decide on the issue of whether BTL was the proper plaintiff in CA 94/2016.')
+ ----------
+6: (CA, 'We next consider the appeal in CA 185/2020 against the Judge’s decision on costs.')
+ ----------
+7: (CA, 'Turning to the costs of the present appeals, the appellants submitted that even if CA 100/2020 is dismissed, the costs of CA 185/2020 should nevertheless be paid by the respondents, as the respondents had refused to give consent to an extension of time for the filing of the notice of appeal in respect of the substantive judgment, such that both the appeals against the substantive judgment and costs judgment could be captured in a single notice of appeal.')
+ ----------
+8: (CA, 'The appeal in CA 100/2020 has been partially allowed as a result of our decision in respect of the abuse of process issue.')
+ ----------
+9: (3,000 in favour of the appellants for CA, 'Having regard to the cost schedules submitted by the parties, we award costs of $80,000 and $3,000 in favour of the appellants for CA 100/2020 and CA 185/2020 respectively.')
+ ----------
+
+2021_SGCAI_3.txt:
+1: (CA, 'CA/CA 136/2020 (“CA 136”) arises from the decision of the International Judge (“the Judge”) regarding the validity of two arbitration awards.')
+ ----------
+2: (CA, 'CA/CA 197/2020 (“CA 197”) arises from the Judge’s order for costs regarding the proceedings before him leading to that decision.')
+ ----------
+3: (CA, 'This judgment addresses the issues arising in and from appeal CA 136, and a separate judgment delivered by Prakash JCA addresses the issues in appeal CA 197.')
+ ----------
+4: (two sale and purchase agreements (which the Court will call “SPA, 'The parties’ disputes arise from two sale and purchase agreements (which the Court will call “SPA I” and “SPA II”) dated 19 June 2015 and governed by Thai law.')
+ ----------
+5: (SPA, 'SPA I was between company CBZ as seller and CBX as buyer.')
+ ----------
+6: (SPA, 'SPA II was between two companies, CCA and CCB, as sellers and company CBY as buyer.')
+ ----------
+7: (SPA, '(f)] of the Phase II Partial Awards arising out of SPA I and SPA II respectively, was that the Buyers make payment in accordance with Clause 3.1')
+ ----------
+8: (5 of SPA, 'Schedule 5 of SPA I will serve as an example:  The tranches relating to the five projects in progress were due for payment within 45 days of three dates in successive years, the first such date being the project’s Commercial Operation Date (“COD”), the second a year post-COD and the third two years post-COD.')
+ ----------
+9: (International Arbitration Act, '(a) the Tribunal had the (procedural) power to award compound interest under the International Arbitration Act (Cap 143A, 2002 Rev Ed) (“the IAA”);')
+ ----------
+10: (IAA, 'He further held that the illegality of compounding interest under Thai law was not the type of “palpable and indisputable” illegality which could, under either the UNCITRAL Model Law on International Commercial Arbitration (the “Model Law”) appended to the IAA or the 1958 Convention on the Recognition and Enforcement of Foreign Arbitral Awards (the “New York Convention”), make the award of compound interest contrary to Singapore public policy.')
+ ----------
+11: (SA, '(a) the party making the application furnishes proof that: As indicated in PT Asuransi Jasa Indonesia (Persero) v Dexia Bank SA [2007] 1 SLR(R) 597 at [40], Article 34(2)')
+ ----------
+12: (24 of the IAA, 'Section 24 of the IAA provides: Notwithstanding Article 34(1) of the Model Law, the General Division of the High Court may, in addition to the grounds set out in Article 34(2) of the Model Law, set aside the award of the arbitral tribunal if —')
+ ----------
+13: (SPA, 'The Buyers did not pay the first instalment under SPA I, and only paid sums towards the first instalment under SPA II in two stages, without interest for late payment.')
+ ----------
+14: (SPA, 'Their initial claim in respect of SPA I was to rescind and recover the shares, but during Phase I it was expanded to include claims (founded on allegations of abuse of rights, conduct frustrating, and other breaches or misconduct) that the payment conditions should be deemed fulfilled, and that the Buyers should pay the Remaining Amounts on an accelerated basis.')
+ ----------
+15: (SPA, 'The Seller’s claim under SPA II at all times included similar claims to the Remaining Amounts on an accelerated basis.')
+ ----------
+16: (2017, the Tribunal dismissed the Sellers’ claims for rescission and ordered payment of the first instalment and compound interest under SPA, 'By its Phase I Partial Awards dated 22 September 2017, the Tribunal dismissed the Sellers’ claims for rescission and ordered payment of the first instalment and compound interest under SPA I.')
+ ----------
+17: (SPA, 'It dismissed the Sellers’ claims for alleged shortfall in respect of the first instalment, and ordered Compound Interest on the first instalment which had been paid under SPA II.')
+ ----------
+18: (85.75m be paid into an escrow account in respect of the non-payment of the first instalment under SPA, 'On 22 December 2017, the Tribunal ordered that US$85.75m be paid into an escrow account in respect of the non-payment of the first instalment under SPA I.')
+ ----------
+19: (four for accelerated payment under both SPAs and the last for rescission of SPA, '[Emphasis added by italics] In written Opening Statements exchanged on 30 August 2018, the Sellers listed seven claims, one for “incidental fraud” in causing the Sellers to enter the SPAs, one for abuse of right under Thai law, four for accelerated payment under both SPAs and the last for rescission of SPA I.')
+ ----------
+20: (2017 Developments) which altered the fundamental promise of the … SPA, '(i) Payment of the Remaining Amounts can no longer be triggered under Thai law, in the light of the Supreme Administrative Court of Thailand’s decision on 26 January 2017, Order No 31/2560 of the Head of the National Council for Peace and Order dated 23 June 2017 and/or Ministerial Regulations promulgated on 29 December 2017 (2017 Developments) which altered the fundamental promise of the … SPA and rendered the payment condition in Clause 3.1')
+ ----------
+21: (SPA, 'SPA was entered into.')
+ ----------
+22: (SPA, '(ii) Further or alternatively, the defectiveness of the [AAA] shares transacted under the … SPA (in light of the 2017 Development) entitles us to withhold the Remaining Amounts and claim for damages suffered (under Section 473 and 488 of the Thai Civil and Commercial Code).')
+ ----------
+23: (SPA, 'For completeness, the paragraph numbers referenced in the extract above are those in the Award relating to SPA I.')
+ ----------
+24: (SPA, 'The equivalent paragraphs in the Award relating to SPA II are at [268] to [273] of that Award.')
+ ----------
+25: (SPA, 'Those did not include any claims to the Remaining Amounts save, in the case of SPA II and later in the case of both SPAs, by way of acceleration.')
+ ----------
+26: (SA, 'To justify what happened, we were referred to PT Prima International Development v Kempinski Hotels SA and other appeals [2012] 4 SLR 98 (“PT Prima”) for the proposition that the Sellers had the right at any time to introduce any new matter, including any claims that might have arisen or might accrue prospectively by the time of any final award.')
+ ----------
+27: (IAA, '(b) of the IAA.')
+ ----------
+28: (IAA, 'The Sellers’ primary position before us is that there is no basis on which this Court can interfere with the Costs Award, since the IAA and Model Law provide the exclusive means by which an arbitral award may be set aside and neither Article 34(2)')
+ ----------
+29: (IAA, '(iii) of the Model Law annexed to the IAA nor s 24')
+ ----------
+30: (IAA, '(b) of the IAA has any application here.')
+ ----------
+31: (69 of the English Arbitration Act, 'The court also went on to say that it made no difference that Davis was a want of jurisdiction case, whereas Martin involved an application to set aside for error of law (under the jurisdiction in that respect contained in s 69 of the English Arbitration Act 1996).')
+ ----------
+32: (IAA, 'In terms of the IAA and Model Law, we consider that this conclusion follows from first principle.')
+ ----------
+33: (IAA, 'In this jurisdiction, there is under the IAA and Model Law no equivalent power to remit to the same tribunal after setting aside.')
+ ----------
+34: (10 of the IAA, 'Section 10 of the IAA enables an arbitral tribunal’s own ruling on jurisdiction to be appealed to the Court, and subsection (7) provides: In making a ruling or decision under this section that the arbitral tribunal has no jurisdiction, the arbitral tribunal, the General Division of the High Court or the appellate court (as the case may be) may make an award or order of costs of the proceedings, including the arbitral proceedings (as the case may be), against any party.')
+ ----------
+35: (24 of the IAA, 'There is, however, no express equivalent tailpiece to either s 24 of the IAA or Article 34 of the Model Law.')
+ ----------
+36: (IAA, 'It operates here by agreement under the ICC Rules and, as a result of the parties’ choice of a Singapore seat, within the relaxed legal framework of the IAA and the Model Law.')
+ ----------
+37: (SPA, 'It expressed itself in the Phase II Partial Award relating to SPA I as follows: 324.')
+ ----------
+38: (SPA, 'The Arbitral Tribunal has already decided the issue as to the applicable interest to the payments under the [CBX] SPA, by ruling as follows in the first Partial Award: [Buyers] do not deny that this rate applies in principle and agree that the rate of 15% is acceptable under Thai law as the maximum allowed rate for loans.')
+ ----------
+39: (15% per annum interest rate is applicable to the First Instalment under the [SPA, 'Accordingly, the Tribunal finds that the 15% per annum interest rate is applicable to the First Instalment under the [SPA I] from 23 October 2015.')
+ ----------
+40: (12.9 of the SPA, 'The Tribunal sees no reason to depart from this ruling in these arbitration proceedings and finds that the 15% interest prescribed in Article 12.9 of the SPA shall be compounded on an annualised basis to all payments due under the Schedule 5 as provided for at para.')
+ ----------
+41: (15% p.a. interest on the First Instalment under the …SPA, '(c) of the first Partial Award in this arbitration, [Sellers] continues to be entitled to 15% p.a. interest on the First Instalment under the …SPA due to the late payment by [Buyers], as from 23 October 2015, and compounded annually from 30 December 2016.')
+ ----------
+42: (277] in the Phase II Partial Award relating to SPA, 'Equivalent paragraphs appear at [276] and [277] in the Phase II Partial Award relating to SPA II.')
+ ----------
+43: (20 of the IAA, 'Even assuming that the Tribunal had been exercising its power to award interest under s 20 of the IAA (see [97] below), a considerably lower interest rate than 15% per annum would, in the Court’s view, have been expected.')
+ ----------
+44: (IAA, '(b) of the IAA.')
+ ----------
+45: (20 of the IAA, 'It is also unnecessary to decide whether the Tribunal could (in the face of Clause 12.9 of the SPAs and the agreement that compounded interest is illegal and unenforceable under Thai law) have proceeded instead under s 20 of the IAA.')
+ ----------
+46: (20 of the IAA, 'The Sellers maintain that the awards of Compound Interest at 15% per annum were and are within the scope of the Tribunal’s power to award interest under s 20 of the IAA.')
+ ----------
+47: (20 of the IAA, 'The Buyers submit that, in the light of Clause 12.9 of the SPAs, the parties had “otherwise agreed”, so that the power under s 20 of the IAA was not available.')
+ ----------
+48: (IAA, 'That may well be the case when interest is claimed under the IAA.')
+ ----------
+49: (20 of the IAA, 'In short, whatever the position had the Tribunal invoked s 20 of the IAA, it did not in fact do so, but instead acted on a basis which was outside the parties’ agreed position as to the unenforceability of the provision for compounding in Clause 12.9 and the consequent limitations on its power under the relevant substantive law of Thailand.')
+ ----------
+50: (20 of the IAA, 'Although we do not suggest that the positions are necessarily precisely parallel, a similar issue, to that which we have discussed in [76] to [85] above in relation to costs, would have arisen as to whether the Tribunal was functus officio as regards the power to award interest under s 20 of the IAA and whether, how and in what forum the position regarding interest could be further considered.')
+ ----------
+51: (CA, 'In the light of the above, it is necessary to revisit the Judge’s order of costs, the quantum of which is the subject of the separate appeal before the Court in appeal CA 197.')
+ ----------
+52: (CA, 'The separate judgment delivered by Prakash JCA in appeal CA 197 addresses the position as it would have been, had appeal CA 136 failed.')
+ ----------
+53: (CA, 'As it is, we have allowed appeal CA 136.')
+ ----------
+
+2021_SGCAI_4.txt:
+1: (CA, 'CA/CA 136/2020 (“CA 136”) was their appeal against the Merits Judgment whilst this appeal, CA/CA 197/2020 (“CA 197”), is the appeal lodged against the Costs Judgment.')
+ ----------
+2: (CA, 'Thus, the Buyers are the successful parties in CA 136.')
+ ----------
+3: (CA, 'But, in this case, we do not think it sufficient to part with CA 197 on that basis.')
+ ----------
+4: (CA, 'It was mounted by the Buyers on the premise that the Judge had erred in principle in his award of costs and that, therefore, even if CA 136 were to fail, there was a basis for this Court to interfere with the assessment of the Sellers’ costs and substantially reduce the amount granted.')
+ ----------
+5: (CA, 'Written submissions were filed in CA 197 by both parties.')
+ ----------
+6: (CA, 'Having studied them and the Costs Judgment, we are of the view that we should deal with the substance of CA 197 and express our views on the assessment of costs in a case that is transferred from the High Court to the SICC.')
+ ----------
+7: (International Arbitration Act, 'But it does reflect the complexity of the work required in order to attack an arbitration award under the International Arbitration Act (Cap 143A, 2002 Rev Ed) and in this case three awards were involved.')
+ ----------
+8: (CA, 'For the reasons given above, even if the Buyers had failed in their substantive appeal, CA 136, we would have allowed the present appeal and made a downwards adjustment in respect of the amount of costs awarded to the Sellers for the proceedings below.')
+ ----------
+9: (CA, 'As for the costs of CA 197, we award these to the Buyers.')
+ ----------
+10: (CA, 'The parties shall include submissions on the amount of costs payable for this appeal in the written submissions they are making in respect of CA 136.')
+ ----------
+

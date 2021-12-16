@@ -1,11 +1,10 @@
-# coding: utf8
-from __future__ import unicode_literals
-
+from typing import Union, Iterator, Tuple
+from ...tokens import Doc, Span
 from ...symbols import NOUN, PROPN, PRON
 from ...errors import Errors
 
 
-def noun_chunks(doclike):
+def noun_chunks(doclike: Union[Doc, Span]) -> Iterator[Tuple[int, int, int]]:
     """
     Detect base noun phrases from a dependency parse. Works on both Doc and Span.
     """
@@ -21,7 +20,7 @@ def noun_chunks(doclike):
         "ROOT",
     ]
     doc = doclike.doc  # Ensure works on both Doc and Span.
-    if not doc.is_parsed:
+    if not doc.has_annotation("DEP"):
         raise ValueError(Errors.E029)
 
     np_deps = [doc.vocab.strings.add(label) for label in labels]
@@ -49,11 +48,10 @@ def noun_chunks(doclike):
             prev_end = word.left_edge.i
             yield word.left_edge.i, extend_right(word), np_label
         elif word.dep == conj:
-            cc_token = word.left_edge  
+            cc_token = word.left_edge
             prev_end = cc_token.i
-            yield cc_token.right_edge.i + 1, extend_right(word), np_label  # Shave off cc tokens from the NP
-
-
+            # Shave off cc tokens from the NP
+            yield cc_token.right_edge.i + 1, extend_right(word), np_label
 
 
 SYNTAX_ITERATORS = {"noun_chunks": noun_chunks}

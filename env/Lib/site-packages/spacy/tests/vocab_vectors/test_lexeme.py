@@ -1,10 +1,25 @@
-# coding: utf-8
-from __future__ import unicode_literals
-
-import pytest
 import numpy
+import pytest
 from spacy.attrs import IS_ALPHA, IS_DIGIT
+from spacy.lookups import Lookups
+from spacy.tokens import Doc
 from spacy.util import OOV_RANK
+from spacy.vocab import Vocab
+
+
+@pytest.mark.issue(361)
+@pytest.mark.parametrize("text1,text2", [("cat", "dog")])
+def test_issue361(en_vocab, text1, text2):
+    """Test Issue #361: Equality of lexemes"""
+    assert en_vocab[text1] == en_vocab[text1]
+    assert en_vocab[text1] != en_vocab[text2]
+
+
+@pytest.mark.issue(600)
+def test_issue600():
+    vocab = Vocab(tag_map={"NN": {"pos": "NOUN"}})
+    doc = Doc(vocab, words=["hello"])
+    doc[0].tag_ = "NN"
 
 
 @pytest.mark.parametrize("text1,prob1,text2,prob2", [("NOUN", -1, "opera", -2)])
@@ -58,6 +73,7 @@ def test_vocab_lexeme_add_flag_provided_id(en_vocab):
     assert en_vocab["199"].check_flag(IS_DIGIT) is False
     assert en_vocab["the"].check_flag(is_len4) is False
     assert en_vocab["dogs"].check_flag(is_len4) is True
+    en_vocab.add_flag(lambda string: string.isdigit(), flag_id=IS_DIGIT)
 
 
 def test_vocab_lexeme_oov_rank(en_vocab):

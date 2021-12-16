@@ -1,6 +1,3 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 import pytest
 
 
@@ -39,6 +36,24 @@ ABBREVIATION_INFLECTION_TESTS = [
     ("EU:n toimesta tehtiin jotain.", ["EU:n", "toimesta", "tehtiin", "jotain", "."]),
 ]
 
+CONTRACTION_TESTS = [
+    (
+        "Päätimme ettemme tule.",
+        ["Päätimme", "ett", "emme", "tule", "."],
+        ["päätimme", "että", "emme", "tule", "."],
+    ),
+    (
+        "Miksei puhuttaisi?",
+        ["Miks", "ei", "puhuttaisi", "?"],
+        ["miksi", "ei", "puhuttaisi", "?"],
+    ),
+    (
+        "He tottelivat vaikkeivat halunneet",
+        ["He", "tottelivat", "vaikk", "eivat", "halunneet"],
+        ["he", "tottelivat", "vaikka", "eivät", "halunneet"],
+    ),
+]
+
 
 @pytest.mark.parametrize("text,expected_tokens", ABBREVIATION_TESTS)
 def test_fi_tokenizer_abbreviations(fi_tokenizer, text, expected_tokens):
@@ -59,3 +74,12 @@ def test_fi_tokenizer_abbreviation_inflections(fi_tokenizer, text, expected_toke
     tokens = fi_tokenizer(text)
     token_list = [token.text for token in tokens if not token.is_space]
     assert expected_tokens == token_list
+
+
+@pytest.mark.parametrize("text,expected_tokens,expected_norms", CONTRACTION_TESTS)
+def test_fi_tokenizer_contractions(fi_tokenizer, text, expected_tokens, expected_norms):
+    tokens = fi_tokenizer(text)
+    token_list = [token.text for token in tokens if not token.is_space]
+    norm_list = [token.norm_ for token in tokens if not token.is_space]
+    assert expected_tokens == token_list
+    assert expected_norms == norm_list

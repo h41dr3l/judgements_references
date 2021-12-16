@@ -1,5 +1,4 @@
 from libcpp.vector cimport vector
-
 from cymem.cymem cimport Pool
 from preshed.maps cimport key_t, MapStruct
 
@@ -19,4 +18,4 @@ cdef class PhraseMatcher:
     cdef Pool mem
     cdef key_t _terminal_hash
 
-    cdef void find_matches(self, Doc doc, vector[SpanC] *matches) nogil
+    cdef void find_matches(self, Doc doc, int start_idx, int end_idx, vector[SpanC] *matches) nogil

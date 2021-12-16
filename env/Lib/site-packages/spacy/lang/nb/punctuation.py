@@ -1,6 +1,3 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 from ..char_classes import LIST_ELLIPSES, LIST_ICONS, LIST_PUNCT, LIST_QUOTES
 from ..char_classes import CONCAT_QUOTES, ALPHA, ALPHA_LOWER, ALPHA_UPPER
 from ..char_classes import CURRENCY, PUNCT, UNITS, LIST_CURRENCY
@@ -30,7 +27,7 @@ _infixes = (
     + [
         r"(?<=[{al}])\.(?=[{au}])".format(al=ALPHA_LOWER, au=ALPHA_UPPER),
         r"(?<=[{a}])[,!?](?=[{a}])".format(a=ALPHA),
-        r"(?<=[{a}])[:<>=](?=[{a}])".format(a=ALPHA),
+        r"(?<=[{a}])[:<>=/](?=[{a}])".format(a=ALPHA),
         r"(?<=[{a}]),(?=[{a}])".format(a=ALPHA),
         r"(?<=[{a}])([{q}\)\]\(\[])(?=[{a}])".format(a=ALPHA, q=_quotes),
         r"(?<=[{a}])--(?=[{a}])".format(a=ALPHA),

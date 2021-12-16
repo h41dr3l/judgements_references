@@ -1,12 +1,8 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 from .stop_words import STOP_WORDS
+from ...language import Language, BaseDefaults
 
-from ...language import Language
 
-
-class GujaratiDefaults(Language.Defaults):
+class GujaratiDefaults(BaseDefaults):
     stop_words = STOP_WORDS
 
 

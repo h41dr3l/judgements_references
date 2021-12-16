@@ -1,45 +1,54 @@
-# coding: utf8
-from __future__ import unicode_literals
+from typing import Optional, Callable
 
-from .stop_words import STOP_WORDS
+from thinc.api import Model
+
+from .lemmatizer import DutchLemmatizer
 from .lex_attrs import LEX_ATTRS
-from .tag_map import TAG_MAP
-from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS
 from .punctuation import TOKENIZER_PREFIXES, TOKENIZER_INFIXES
 from .punctuation import TOKENIZER_SUFFIXES
-from .lemmatizer import DutchLemmatizer
-from ..tokenizer_exceptions import BASE_EXCEPTIONS
-from ..norm_exceptions import BASE_NORMS
-from ...language import Language
-from ...lookups import Lookups
-from ...attrs import LANG, NORM
-from ...util import update_exc, add_lookups
+from .stop_words import STOP_WORDS
+from .syntax_iterators import SYNTAX_ITERATORS
+from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS
+from ...language import Language, BaseDefaults
 
 
-class DutchDefaults(Language.Defaults):
-    lex_attr_getters = dict(Language.Defaults.lex_attr_getters)
-    lex_attr_getters.update(LEX_ATTRS)
-    lex_attr_getters[LANG] = lambda text: "nl"
-    lex_attr_getters[NORM] = add_lookups(
-        Language.Defaults.lex_attr_getters[NORM], BASE_NORMS
-    )
-    tokenizer_exceptions = update_exc(BASE_EXCEPTIONS, TOKENIZER_EXCEPTIONS)
-    stop_words = STOP_WORDS
-    tag_map = TAG_MAP
+class DutchDefaults(BaseDefaults):
+    tokenizer_exceptions = TOKENIZER_EXCEPTIONS
     prefixes = TOKENIZER_PREFIXES
     infixes = TOKENIZER_INFIXES
     suffixes = TOKENIZER_SUFFIXES
-
-    @classmethod
-    def create_lemmatizer(cls, nlp=None, lookups=None):
-        if lookups is None:
-            lookups = Lookups()
-        return DutchLemmatizer(lookups)
+    lex_attr_getters = LEX_ATTRS
+    syntax_iterators = SYNTAX_ITERATORS
+    stop_words = STOP_WORDS
 
 
 class Dutch(Language):
     lang = "nl"
     Defaults = DutchDefaults
+
+
+@Dutch.factory(
+    "lemmatizer",
+    assigns=["token.lemma"],
+    default_config={
+        "model": None,
+        "mode": "rule",
+        "overwrite": False,
+        "scorer": {"@scorers": "spacy.lemmatizer_scorer.v1"},
+    },
+    default_score_weights={"lemma_acc": 1.0},
+)
+def make_lemmatizer(
+    nlp: Language,
+    model: Optional[Model],
+    name: str,
+    mode: str,
+    overwrite: bool,
+    scorer: Optional[Callable],
+):
+    return DutchLemmatizer(
+        nlp.vocab, model, name, mode=mode, overwrite=overwrite, scorer=scorer
+    )
 
 
 __all__ = ["Dutch"]
