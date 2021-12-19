@@ -52,7 +52,6 @@ with open('legis_name.txt', 'r') as f:
         titles.append(title)
         codes.append(statute_code)
 
-
 with open('2000_SGCA_64.txt', 'r') as f:
     test = f.read()
 #test text
