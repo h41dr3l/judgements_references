@@ -31,7 +31,14 @@ def num_pos_tagger(doc):
                 break
     return doc
 
-
+def get_para_no():
+    for para in para_list:
+        para_no = para_list.index(para) +1
+        if match.text in para and (f"{str(para_no)}: {matched_word} ({title})") in match_with_titles:
+            continue
+        elif match.text in para:
+            break
+    return para_no
 
 #gets the list of titles and code of a statute 
 titles = []
@@ -53,7 +60,7 @@ with open('legis_name.txt', 'r') as f:
         codes.append(statute_code)
 
 
-with open('2000_SGCA_64.txt', 'r') as f:
+with open('2000_SGCA_55.txt', 'r') as f:
     test = f.read()
 #test text
 # test ="""Burswood Nominees similarly involved the registration of an Australian judgment for 
@@ -77,6 +84,7 @@ nlp = en_core_web_sm.load()
 nlp.tokenizer = TokenizerWithFormatting(nlp)
 nlp.add_pipe(num_pos_tagger, name="pos_num", after='tagger')
 doc = nlp(test)
+para_list = doc.text.split('\n')
 matcher = Matcher(nlp.vocab, validate=True)
 
 
@@ -95,9 +103,9 @@ matchlist = []
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]  # Get string representation
     span = doc[start:end]
-    item = (start, span)
-    if item not in matchlist: 
-        matchlist.append(item)  
+    # item = (start, span)
+    if span not in matchlist: 
+        matchlist.append(span)  
 
 #get matches for titles
 titles_matcher = PhraseMatcher(nlp.vocab)
@@ -116,15 +124,14 @@ if len(title_matches) != 0:
                 break
         if start != 0: #only when there is a number before the statute title
             span = doc[start:end]  
-            item = (start, span)
-            if item not in matchlist: 
-                matchlist.append(item)
+            # item = (start, span)
+            if span not in matchlist: 
+                matchlist.append(span)
 
 #retreive the titles for respective statute codes found 
 match_with_titles = []
 for match in matchlist:
-    index_of_doc = match[0]
-    words = str(match[1]).split(' ')
+    words = str(match).split(' ')
     title = ''
     for word in words:
         if word in codes:
@@ -133,10 +140,12 @@ for match in matchlist:
             break
     if len(title) != 0: #match has a statute code
         matched_word = ' '.join(words) 
-        match_with_titles.append(f"{str(index_of_doc)}: {matched_word} ({title})")
+        para_no = get_para_no()
+        match_with_titles.append(f"{str(para_no)}: {matched_word} ({title})")
     else: #match has a title
         matched_word = ' '.join(words) 
-        match_with_titles.append(f"{str(index_of_doc)}: {matched_word}")
+        para_no = get_para_no()
+        match_with_titles.append(f"{str(para_no)}: {matched_word}")
 
 
 #output
