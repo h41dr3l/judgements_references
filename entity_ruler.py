@@ -118,6 +118,6 @@ def extract_ref_sentences(filename):
     spacy.displacy.serve(doc, style="ent")
 
 
-extract_ref_sentences("./html/2021_SGHC_16.txt")
+extract_ref_sentences("./html/2021_SGHC_81.txt")
 
 
