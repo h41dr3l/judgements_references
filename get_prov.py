@@ -82,13 +82,13 @@ def extract_ref_sentences(filename):
             if word.isdigit() == True: #for statutes with years in the title
                 prov_pattern.append({"TEXT": word, "OP":"?"})
                 schedule_pattern.append({"TEXT": word, "OP":"?"})
-            elif word[-1] in ",')": #statute title has close bracket, comma, punctuation etc.
+            elif word[-1] in ",')": #if word in statute title has close bracket, comma, punctuation etc.
                 prov_pattern.extend(({"LOWER": word[0:-1].lower()},{"ORTH": word[-1]}))
                 schedule_pattern.extend(({"LOWER": word[0:-1].lower()},{"ORTH": word[-1]}))
-            elif word[-1] in "(": #statute title has open bracket
+            elif word[-1] in "(": #if word in statute title has open bracket
                 prov_pattern.extend(({"ORTH": word[0]},{"LOWER": word[1:].lower()}))
                 schedule_pattern.extend(({"ORTH": word[0]},{"LOWER": word[1:].lower()}))
-            else: #nomral text            
+            else: #word is a normal text            
                 prov_pattern.append({"LOWER": word.lower()})
                 schedule_pattern.append({"LOWER": word.lower()})
 
@@ -161,12 +161,13 @@ def extract_ref_sentences(filename):
     # for token in doc:
     #     print(token, token.pos_)
 
-    legis_abbrev = match_legis_abbrev(doc,nlp)
+    #gets list of abbreviations, if no abbreviations, will display on displacy
+    legis_abbrev = match_legis_abbrev(doc)
     if len(legis_abbrev) == 0:
         spacy.displacy.serve(doc, style="ent")
         return 0
     
-    #getting entity for abbreviations
+    #setting entity label to 'PROVISION' for abbreviations
     pattern_abbrev = []
     for match in legis_abbrev:
         abbrev = match[1]
@@ -201,7 +202,7 @@ def get_entity_labels(doc):
     return entity_labels
 
 #gets abbreviations for legislation
-def match_legis_abbrev(doc, nlp):
+def match_legis_abbrev(doc):
     entity_labels = get_entity_labels(doc)
     matches = []
     for i in range(0, len(entity_labels)-2):
@@ -214,4 +215,4 @@ def match_legis_abbrev(doc, nlp):
     return matches
 
 #calling the main function 
-extract_ref_sentences("./html/2021_SGHC_9.txt")
+extract_ref_sentences("./html/2021_SGHC_42.txt")
