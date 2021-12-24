@@ -1,4 +1,4 @@
-#splits up provision number and act i.e. "s 43 of the Company Act" PROVISION
+#splits up provision number and act i.e. "s 43" PROV and "Company Act" LEGISLATION
 import spacy 
 import en_core_web_sm
 from spacy.language import Language
@@ -65,55 +65,23 @@ def extract_ref_sentences(filename):
     # nlp.add_pipe("num_pos_tagger", before="tagger")
     ruler = nlp.add_pipe("entity_ruler", config={"validate": True}, before='ner')
     Token.set_extension("is_number", getter=is_num_getter)
-
-
-    pattern = []
+    
+    legis_title_pattern = []
     for title in titles: #create patterns for each title
         title = title.split()
-        prov_pattern = [{"LOWER": "s", "OP":"?"},
-                        {"IS_PUNCT": False, '_': {'is_number': True}, "OP":"+"}, 
-                        {"LOWER":"of", "OP":"?"}, 
-                        {"LOWER": "the", "OP": "?"}]
-        schedule_pattern = [{"POS": "PROPN", "OP": "?"},
-                            {"LOWER":"schedule"}, 
-                            {"LOWER":"of", "OP":"?"},
-                            {"LOWER":"to", "OP":"?"}, 
-                            {"LOWER": "the", "OP": "?"}]                
+        title_pattern = []
         for word in title: #add all the words in the title to the pattern
             if word.isdigit() == True: #for statutes with years in the title
-                prov_pattern.append({"TEXT": word, "OP":"?"})
-                schedule_pattern.append({"TEXT": word, "OP":"?"})
+                title_pattern.append({"TEXT": word, "OP":"?"})
             elif word[-1] in ",')": #if word in statute title has close bracket, comma, punctuation etc.
-                prov_pattern.extend(({"LOWER": word[0:-1].lower()},{"ORTH": word[-1]}))
-                schedule_pattern.extend(({"LOWER": word[0:-1].lower()},{"ORTH": word[-1]}))
+                title_pattern.extend(({"LOWER": word[0:-1].lower()},{"ORTH": word[-1]}))
             elif word[-1] in "(": #if word in statute title has open bracket
-                prov_pattern.extend(({"ORTH": word[0]},{"LOWER": word[1:].lower()}))
-                schedule_pattern.extend(({"ORTH": word[0]},{"LOWER": word[1:].lower()}))
+                title_pattern.extend(({"ORTH": word[0]},{"LOWER": word[1:].lower()}))
             else: #word is a normal text            
-                prov_pattern.append({"LOWER": word.lower()})
-                schedule_pattern.append({"LOWER": word.lower()})
+                title_pattern.append({"LOWER": word.lower()})
+        legis_title_pattern.append({"label": "LEGISLATION", "pattern": title_pattern})
 
-        pattern.append({"label": "PROVISION", "pattern": prov_pattern})
-        pattern.append({"label": "PROVISION", "pattern": schedule_pattern})
-    ruler.add_patterns(pattern)
- 
-    pattern_codes = []
-    for code in codes: #create patterns for each code
-        prov_pattern = [{"LOWER": "s", "OP":"?"},
-                        {"IS_PUNCT": False, '_': {'is_number': True}, "OP":"+"}, 
-                        {"ORTH": ")", "OP": "?"},
-                        {"LOWER":"of", "OP":"?"}, 
-                        {"LOWER": "the", "OP": "?"},
-                        {"TEXT": code}]
-        schedule_pattern = [{"POS": "PROPN", "OP": "?"},
-                            {"LOWER":"schedule"}, 
-                            {"LOWER":"of", "OP":"?"},
-                            {"LOWER":"to", "OP":"?"}, 
-                            {"LOWER": "the", "OP": "?"},
-                            {"TEXT": code}]                
-        pattern_codes.append({"label": "PROVISION", "pattern": prov_pattern})
-        pattern_codes.append({"label": "PROVISION", "pattern": schedule_pattern})
-    ruler.add_patterns(pattern_codes)
+    ruler.add_patterns(legis_title_pattern)
 
     #labelling abbreviations
     ruler.add_patterns([
@@ -129,7 +97,7 @@ def extract_ref_sentences(filename):
             {'ORTH': '”'},
             {'ORTH': ')'}
         ]},
-    #labelling edition of legislation used 
+    #labelling edition of legislation used
         {'label': 'EDITION',
         'pattern': [
             {'ORTH': '('},
@@ -149,7 +117,23 @@ def extract_ref_sentences(filename):
             {'LOWER': "of"},
             {'IS_DIGIT': True},
             {'ORTH':')'}
-        ]}          
+        ]},
+    #labelling provision patterns 
+        {'label':'PROVISION', 
+        'pattern': [
+            {"LOWER": {"IN":['s','section','ss']}},
+            {"IS_PUNCT": False, '_': {'is_number': True}, "OP":"+"} 
+        ]},
+        {'label':'PROVISION', 
+        'pattern': [
+            {"POS": "PROPN"},
+            {"LOWER":"schedule"}, 
+        ]},
+    #labelling shorthand code as legislation
+        {'label':'LEGISLATION', 
+        'pattern': [
+            {"TEXT": {"IN": codes}}
+        ]},             
         ])
 
     #get doc
@@ -174,21 +158,10 @@ def extract_ref_sentences(filename):
         abbrev = match[1]
         if abbrev not in titles:
             abbrev = abbrev.split()
-            prov_pattern = [{"LOWER": "s", "OP":"?"},
-                            {"IS_PUNCT": False, '_': {'is_number': True}, "OP":"+"}, 
-                            {"ORTH": ")", "OP": "?"},
-                            {"LOWER":"of", "OP":"?"}, 
-                            {"LOWER": "the", "OP": "?"}]
-            schedule_pattern = [{"POS": "PROPN", "OP": "?"},
-                            {"LOWER":"schedule"}, 
-                            {"LOWER":"of", "OP":"?"},
-                            {"LOWER":"to", "OP":"?"}, 
-                            {"LOWER": "the", "OP": "?"}]                
+            abb_pattern = []               
             for word in abbrev: #add all the words in the title to the pattern          
-                prov_pattern.append({"LOWER": word.lower()})
-                schedule_pattern.append({"LOWER": word.lower()})
-            pattern_abbrev.append({"label": "PROVISION", "pattern": prov_pattern})
-            pattern_abbrev.append({"label": "PROVISION", "pattern": schedule_pattern})
+                abb_pattern.append({"LOWER": word.lower()})
+            pattern_abbrev.append({"label": "PROVISION", "pattern": abb_pattern})
     if len(pattern_abbrev) != 0:
         ruler.add_patterns(pattern_abbrev)
         doc = nlp(test)
@@ -207,13 +180,14 @@ def match_legis_abbrev(doc):
     entity_labels = get_entity_labels(doc)
     matches = []
     for i in range(0, len(entity_labels)-2):
-        current_entity, current_entity_label = entity_labels[i]
-        next_entity, next_entity_label = entity_labels[i+1]
-        after_entity, after_entity_label = entity_labels[i+2]
-        if current_entity_label == "PROVISION" and next_entity_label =="EDITION" and after_entity_label =='ABBREVIATION':
-            matches.append((current_entity, after_entity[2:-2]))
-    print(matches)
+        current_entity, current_entity_label = entity_labels[i] #legis title/code
+        second_entity, second_entity_label = entity_labels[i+1] #edition
+        third_entity, third_entity_label = entity_labels[i+2] #abbreviation attached 
+        if (current_entity_label == "LEGISLATION" 
+        and second_entity_label =="EDITION" and third_entity_label =='ABBREVIATION'):
+            matches.append((current_entity, third_entity[2:-2]))
+    print(matches) #see which abbreviations are for which legislation
     return matches
 
 #calling the main function 
-extract_ref_sentences("./html/2021_SGHC_42.txt")
+extract_ref_sentences("./html/2021_SGHC_81.txt")
