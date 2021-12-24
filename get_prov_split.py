@@ -88,6 +88,7 @@ def extract_ref_sentences(filename):
         {'label': 'ABBREVIATION',
         'pattern': [
             {'ORTH': '('},
+            {'LOWER':'the', 'OP':'?'},
             {'ORTH': '“'}, 
             {'IS_ALPHA': True, 'OP': '+'}, #assumes abbreviations have max 5 words TODO: more efficient way?
             {'IS_ALPHA': True, 'OP': '?'},
@@ -128,12 +129,7 @@ def extract_ref_sentences(filename):
         'pattern': [
             {"POS": "PROPN"},
             {"LOWER":"schedule"}, 
-        ]},
-    #labelling shorthand code as legislation
-        {'label':'LEGISLATION', 
-        'pattern': [
-            {"TEXT": {"IN": codes}}
-        ]},             
+        ]}          
         ])
 
     #get doc
@@ -161,7 +157,7 @@ def extract_ref_sentences(filename):
             abb_pattern = []               
             for word in abbrev: #add all the words in the title to the pattern          
                 abb_pattern.append({"LOWER": word.lower()})
-            pattern_abbrev.append({"label": "PROVISION", "pattern": abb_pattern})
+            pattern_abbrev.append({"label": "LEGISLATION", "pattern": abb_pattern})
     if len(pattern_abbrev) != 0:
         ruler.add_patterns(pattern_abbrev)
         doc = nlp(test)
@@ -185,9 +181,10 @@ def match_legis_abbrev(doc):
         third_entity, third_entity_label = entity_labels[i+2] #abbreviation attached 
         if (current_entity_label == "LEGISLATION" 
         and second_entity_label =="EDITION" and third_entity_label =='ABBREVIATION'):
-            matches.append((current_entity, third_entity[2:-2]))
+            index = third_entity.index('“')
+            matches.append((current_entity, third_entity[index+1:-2]))
     print(matches) #see which abbreviations are for which legislation
     return matches
 
 #calling the main function 
-extract_ref_sentences("./html/2021_SGHC_81.txt")
+extract_ref_sentences("./html/2017_SGHC_122.txt")
