@@ -156,7 +156,7 @@ def extract_ref_sentences(filename):
             abbrev = abbrev.split()
             abb_pattern = []               
             for word in abbrev: #add all the words in the title to the pattern          
-                abb_pattern.append({"LOWER": word.lower()})
+                abb_pattern.append({"TEXT": word})
             pattern_abbrev.append({"label": "LEGISLATION", "pattern": abb_pattern})
     if len(pattern_abbrev) != 0:
         ruler.add_patterns(pattern_abbrev)
@@ -187,4 +187,4 @@ def match_legis_abbrev(doc):
     return matches
 
 #calling the main function 
-extract_ref_sentences("./html/2017_SGHC_122.txt")
+extract_ref_sentences("./html/2021_SGHC_81.txt")
